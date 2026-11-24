@@ -5,4 +5,12 @@ def busiest_window(deliveries: list[int], k: int) -> int:
     window length. Bounds: 1 <= k <= len(deliveries) <= 10^5 and
     0 <= deliveries[i] <= 10^4.
     """
-    raise NotImplementedError
+    current = sum(deliveries[i] for i in range(k))
+    best = current
+
+    for i in range(k, len(deliveries)):
+        current += deliveries[i] - deliveries[i-k]
+        if current>best:
+            best = current
+
+    return best
